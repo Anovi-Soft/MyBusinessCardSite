@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript" src="~/Scripts/Initializer.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/StyleFonts.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/StyleBase.css" />
+    @if (Request.Browser.IsMobileDevice)
+    {
+        <link rel="stylesheet" type="text/css" href="~/Content/StyleMobile.css" />
+    }
+    else
+    {
+        <link rel="stylesheet" type="text/css" href="~/Content/StyleSite.css" />
+    }
+    <link rel="shortcut icon" href="~/Content/Images/icon.png">
+    <title>AnoviAlbum</title>
+</head>
+<body id="baseBody" onload="init()">
+
+    <div class="center_column" id="baseColumn">
+
+    </div>
+
+</body>
+</html>

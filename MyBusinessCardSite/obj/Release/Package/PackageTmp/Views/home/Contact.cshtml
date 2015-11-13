@@ -1,0 +1,97 @@
+﻿@model MyBusinessCardSite.Models.ContactModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript" src="~/Scripts/Initializer.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/StyleFonts.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/StyleBase.css" />
+    @if (Request.Browser.IsMobileDevice)
+    {
+        <link rel="stylesheet" type="text/css" href="~/Content/StyleMobile.css" />
+    }
+    else
+    {
+        <link rel="stylesheet" type="text/css" href="~/Content/StyleSite.css" />
+    }
+    <link rel="shortcut icon" href="~/Content/Images/icon.png">
+    <title>Anovi Contact</title>
+</head>
+<body id="baseBody" onload="init()">
+
+<div class="center_column" id="baseColumn">
+
+    <div class="paper_group">
+        @using (Html.BeginForm())
+            {
+            <div class="paper">
+                <div class="paper_up">
+                    <div class="row">
+                        <div class="col-6-8">
+                            <h1>Write me on email</h1>
+                        </div>
+                        <div class="col-1-8"></div>
+                        <div class="col-1-8">
+                            <button type="submit" class="bar_button">Send</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1" style="padding: 0 0 20px 0">
+                        @Html.ValidationSummary()
+                    </div>
+                    @if (Request.Browser.IsMobileDevice)
+                    {
+                        <div class="col-1">
+                            <h4>*Your name:</h4>
+                            @Html.TextBoxFor(x => x.Name, new { @class = "text_box" })
+                            <h4>*Your email:</h4>
+                            @Html.TextBoxFor(x => x.Email, new { @class = "text_box" })
+                            <h4>Your phone:</h4>
+                            @Html.TextBoxFor(x => x.Phone, new { @class = "text_box" })
+                            <h4>Subject: </h4>
+                            @Html.TextBoxFor(x => x.Title, new { @class = "text_box" })
+                            <h4>*Message: </h4>
+                            @Html.TextAreaFor(x => x.Text, new { @class = "text_box" })
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="col-1-6">
+                            <h4>*Your name:</h4>
+                            <h4>*Your email:</h4>
+                            <h4>Your phone:</h4>
+                            <h4>Subject: </h4>
+                            <h4>*Message: </h4>
+                        </div>
+                        <div class="col-5-6">
+                            @Html.TextBoxFor(x => x.Name, new { @class = "text_box" })
+                            @Html.TextBoxFor(x => x.Email, new { @class = "text_box" })
+                            @Html.TextBoxFor(x => x.Phone, new { @class = "text_box" })
+                            @Html.TextBoxFor(x => x.Title, new { @class = "text_box" })
+                            @Html.TextAreaFor(x => x.Text, new { @class = "text_box" })
+                        </div>
+                    }
+                    <div class="col-1">
+                        <h4 style="margin: 10px 0 0 -20px">Fields marked by red asterisk (*) are mandatory.</h4>
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    </div>
+
+
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript" src="~/Scripts/Initializer.js"></script>
+    <script type="text/javascript" src="~/Scripts/GameFift.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/StyleFonts.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/StyleBase.css" />
+    @if (Request.Browser.IsMobileDevice)
+    {
+        <link rel="stylesheet" type="text/css" href="~/Content/StyleMobile.css" />
+    }
+    else
+    {
+        <link rel="stylesheet" type="text/css" href="~/Content/StyleSite.css" />
+    }
+    <link rel="shortcut icon" href="~/Content/Images/icon.png">
+    <title>AnoviAlbum</title>
+</head>
+<body id="baseBody" onload="init(); initGame();">
+
+    <div class="center_column" id="baseColumn">
+
+        <div class="paper_group" id="game_group">
+            <div class="paper">
+                <div class="paper_up">
+                    <div class="row">
+                        <div class="col-6-8">
+                            <h1>15</h1>
+                        </div>
+                        <div class="col-1-8"></div>
+                        <div class="col-1-8">
+                            <button class="bar_button" onclick="shuffle(); update(); message();">Restart</button>
+                        </div>
+                    </div>
+                </div>
+                <h2 id="game_message">It`s an easy game</h2>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
