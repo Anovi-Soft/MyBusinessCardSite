@@ -1,11 +1,14 @@
-﻿function SetCookie(cname, cvalue) {
+﻿
+function SetCookie(cname, cvalue) {
     var d = new Date();
+    var tmp = document.cookie;
     d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
 function GetCookie(cname) {
+    var tmp = document.cookie;
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
@@ -21,5 +24,6 @@ function checkCookie(name) {
 }
 
 function DeleteCookie(name) {
-    document.cookie = name+"=;expires=Wed; 01 Jan 1970"
+    var tmp = document.cookie;
+    document.cookie = name + "=;expires=Wed; 01 Jan 1970";
 }

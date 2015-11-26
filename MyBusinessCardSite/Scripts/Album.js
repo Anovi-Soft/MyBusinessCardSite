@@ -6,17 +6,21 @@ var loadedImg = {};
 var IsIe = false;
 
 function InitAlbum(dict, isIe) {
-    alert(isIe);
     dictNames = dict;
     IsIe = isIe;
     for (var key in dictNames) {
         loadedImg[key] = [];
     }
     window.onhashchange = LocationUpdate;
-    window.onkeyup = KeyUp;
+    if (IsIe) {
+        document.onkeyup = KeyUp;
+    } else {
+        window.onkeyup = KeyUp;
+    }
     window.onundo = LocationUpdate;
     LocationUpdate();
     ResizeAlbum();
+
 }
 function LocationUpdate() {
     var splt = window.location.toString().split("#");
@@ -52,6 +56,8 @@ function ImageClick(i, name) {
 function SetImage() {
     window.location.href = "#"+typeAlbum + "-" + index;
     document.getElementById("content").style.opacity = "0";
+    document.getElementById("leftAlbum").style.top = "70px";
+    document.getElementById("rightAlbum").style.top = "70px";
     if (!IsIe) {
         img = new Image();
         img.src = dictNames[typeAlbum][index];
@@ -183,7 +189,24 @@ function ResizeAlbum() {
         else
             button.style.left = (widthWindow - setWidth) / 2 + 100 + "px";
     } else {
-        
+
+        var button = document.getElementById("buttonBack");
+        if (typeAlbum == "Films") {
+            content.style.width = "auto";
+            content.style.height = "70%";
+            content.style.top = "18%";
+            content.style.left = IsMenuOpend ? "45%" : "35%";
+            button.style.top = "18%";
+            button.style.left = IsMenuOpend ? "45%" : "35%";
+        } else {
+            content.style.height = "auto";
+            content.style.width = "70%";
+            content.style.left = IsMenuOpend ? "20%" : "15%";
+            content.style.top = "10%";
+            button.style.left = IsMenuOpend ? "20%" : "15%";
+            button.style.top = "10%";
+        }
+
     }
     
 }
@@ -200,7 +223,7 @@ function Previos() {
 }
 
 function Close() {
-    preloadOn = false;
+    //preloadOn = false;
     window.location.href = "#";
     typeAlbum = "";
     var back = document.getElementById("albumGrayBack");
@@ -218,11 +241,14 @@ function Close() {
     content.style.opacity = "0";
     var button = document.getElementById("buttonBack");
     button.style.left = "-100%";
+    document.getElementById("leftAlbum").style.top = "-100%";
+    document.getElementById("rightAlbum").style.top = "-100%";
 }
 
 function KeyUp(event) {
     event = event || window.event;
-    switch (event.keyCode) {
+    var keyCode = event.keyCode;
+    switch (keyCode) {
         case 27:
             if (typeAlbum != "") Close();
             break;
@@ -244,8 +270,9 @@ function KeyUp(event) {
 
 var backOn = "<h2>SetAsBackground</h2>";
 var backOff = "<h2>UnSetAsBackground</h2>";
+var backOffUp = "<H2>UnSetAsBackground</H2>";
 function SetAsBackGround(sender) {
-    if (sender.innerHTML == backOff) {
+    if (sender.innerHTML == backOff || sender.innerHTML == backOffUp) {
         DeleteCookie("backGround");
         sender.innerHTML = backOn;
     } else {

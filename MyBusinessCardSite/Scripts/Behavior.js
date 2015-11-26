@@ -40,12 +40,14 @@ function UpdateBackground() {
         //window.addEventListener('beforeunload', SaveOpacity);
         var back = document.getElementById("firstBack");
         back.style.background = "url('images/background.png')";
+        document.getElementById('secondBack').style.left = "0";
         //timer = window.setTimeout("Timer();", timerInterval);
     } else {
         var src = GetCookie("backGround");
         var back = document.getElementById("firstBack");
         back.style.background = "url('" + src + "')";
         document.getElementById('secondBack').style.opacity = "0";
+        document.getElementById('secondBack').style.left = "-100%";
     }
 }
 

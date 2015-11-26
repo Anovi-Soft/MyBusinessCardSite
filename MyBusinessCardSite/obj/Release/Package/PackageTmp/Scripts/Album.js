@@ -6,17 +6,21 @@ var loadedImg = {};
 var IsIe = false;
 
 function InitAlbum(dict, isIe) {
-    alert(isIe);
     dictNames = dict;
     IsIe = isIe;
     for (var key in dictNames) {
         loadedImg[key] = [];
     }
     window.onhashchange = LocationUpdate;
-    window.onkeyup = KeyUp;
+    if (IsIe) {
+        document.onkeyup = KeyUp;
+    } else {
+        window.onkeyup = KeyUp;
+    }
     window.onundo = LocationUpdate;
     LocationUpdate();
     ResizeAlbum();
+
 }
 function LocationUpdate() {
     var splt = window.location.toString().split("#");
@@ -52,6 +56,8 @@ function ImageClick(i, name) {
 function SetImage() {
     window.location.href = "#"+typeAlbum + "-" + index;
     document.getElementById("content").style.opacity = "0";
+    document.getElementById("leftAlbum").style.top = "70px";
+    document.getElementById("rightAlbum").style.top = "70px";
     if (!IsIe) {
         img = new Image();
         img.src = dictNames[typeAlbum][index];
@@ -75,6 +81,7 @@ function SetImage() {
         content.src = dictNames[typeAlbum][index];
         content.style.opacity = "1";
         document.getElementById("loading").style.opacity = "0";
+        document.getElementById("loading").style.left = "-100%";
         ResizeAlbum();
         PreLoad(1, index);
         PreLoad(-1, index);
@@ -134,56 +141,74 @@ function ResizeAlbum() {
     var imgMaxWidth = widthWindow * 0.7;
     var imgMaxHeight = heightWindow * 0.8;
 
-    var windowSmallerThenImage;
-    if (!IsIe)
-        windowSmallerThenImage = img.width > imgMaxWidth || img.height > imgMaxHeight;
-    else
-        windowSmallerThenImage = true;
-    var setWidth;
-    var setHeight;
-    var currentImageWidth = parseInt(img.width);
-    var currentImageHeight = parseInt(img.height);
+    if (!IsIe) {
+        var windowSmallerThenImage = img.width > imgMaxWidth || img.height > imgMaxHeight;
+        var setWidth;
+        var setHeight;
+        var currentImageWidth = parseInt(img.width);
+        var currentImageHeight = parseInt(img.height);
 
-    if ((currentImageWidth / imgMaxWidth > currentImageHeight / imgMaxHeight) || !windowSmallerThenImage) {
-        setWidth = imgMaxWidth;
-        setHeight = img.height * ((img.width > imgMaxWidth) ? imgMaxWidth / img.width : img.width / imgMaxWidth);
+        if ((currentImageWidth / imgMaxWidth > currentImageHeight / imgMaxHeight) || !windowSmallerThenImage) {
+            setWidth = imgMaxWidth;
+            setHeight = img.height * ((img.width > imgMaxWidth) ? imgMaxWidth / img.width : img.width / imgMaxWidth);
+        } else {
+            setHeight = imgMaxHeight;
+            setWidth = img.width * ((img.height > imgMaxHeight) ? imgMaxHeight / img.height : img.height / imgMaxHeight);
+        }
+
+        if (widthWindow < 1000) {
+            document.getElementById("leftAlbum").style.left = '20px';
+            content.style.left = (widthWindow - setWidth) / 2 + "px";
+            var gbLeft = document.getElementById("gbLeft");
+            gbLeft.style.left = "0";
+            gbLeft.style.width = widthWindow / 2 + "px";
+            var gbRight = document.getElementById("gbRight");
+            gbRight.style.left = widthWindow / 2 + "px";
+            gbRight.style.width = widthWindow / 2 + "px";
+            document.getElementById("loading").style.left = widthWindow / 2 + "px";
+
+        } else {
+            content.style.left = (widthWindow - setWidth) / 2 + 100 + "px";
+            document.getElementById("leftAlbum").style.left = '220px';
+            var gbLeft = document.getElementById("gbLeft");
+            gbLeft.style.left = "200px";
+            gbLeft.style.width = (widthWindow / 2 - 100) + "px";
+            var gbRight = document.getElementById("gbRight");
+            gbRight.style.left = (widthWindow / 2 + 100) + "px";
+            gbRight.style.width = (widthWindow / 2 - 100) + "px";
+            document.getElementById("loading").style.left = (widthWindow / 2 + 100) + "px";
+        }
+        content.style.top = (heightWindow - setHeight) / 1.75 + "px";
+        content.style.width = setWidth + "px";
+        content.style.height = setHeight + "px";
+
+        var button = document.getElementById("buttonBack");
+        button.style.top = ((heightWindow - setHeight) / 1.75 + setHeight) + "px";
+        if (widthWindow < 1000)
+            button.style.left = (widthWindow - setWidth) / 2 + "px";
+        else
+            button.style.left = (widthWindow - setWidth) / 2 + 100 + "px";
     } else {
-        setHeight = imgMaxHeight;
-        setWidth = img.width * ((img.height > imgMaxHeight) ? imgMaxHeight / img.height : img.height / imgMaxHeight);
+
+        var button = document.getElementById("buttonBack");
+        if (typeAlbum == "Films") {
+            content.style.width = "auto";
+            content.style.height = "70%";
+            content.style.top = "18%";
+            content.style.left = IsMenuOpend ? "45%" : "35%";
+            button.style.top = "18%";
+            button.style.left = IsMenuOpend ? "45%" : "35%";
+        } else {
+            content.style.height = "auto";
+            content.style.width = "70%";
+            content.style.left = IsMenuOpend ? "20%" : "15%";
+            content.style.top = "10%";
+            button.style.left = IsMenuOpend ? "20%" : "15%";
+            button.style.top = "10%";
+        }
+
     }
-
-    if (widthWindow < 1000) {
-        document.getElementById("leftAlbum").style.left = '20px';
-        content.style.left = (widthWindow - setWidth) / 2 + "px";
-        var gbLeft = document.getElementById("gbLeft");
-        gbLeft.style.left = "0";
-        gbLeft.style.width = widthWindow / 2 + "px";
-        var gbRight = document.getElementById("gbRight");
-        gbRight.style.left = widthWindow / 2 + "px";
-        gbRight.style.width = widthWindow / 2 + "px";
-        document.getElementById("loading").style.left = widthWindow / 2 + "px";
-
-    } else {
-        content.style.left = (widthWindow - setWidth) / 2 + 100 + "px";
-        document.getElementById("leftAlbum").style.left = '220px';
-        var gbLeft = document.getElementById("gbLeft");
-        gbLeft.style.left = "200px";
-        gbLeft.style.width = (widthWindow / 2  - 100) + "px";
-        var gbRight = document.getElementById("gbRight");
-        gbRight.style.left = (widthWindow / 2 + 100) + "px";
-        gbRight.style.width = (widthWindow / 2 - 100) + "px";
-        document.getElementById("loading").style.left = (widthWindow / 2 + 100) + "px";
-    }
-    content.style.top = (heightWindow - setHeight) / 1.75 + "px";
-    content.style.width = setWidth + "px";
-    content.style.height = setHeight + "px";
-
-    var button = document.getElementById("buttonBack");
-    button.style.top = ((heightWindow - setHeight) / 1.75 + setHeight) + "px";
-    if (widthWindow < 1000) 
-        button.style.left = (widthWindow - setWidth) / 2 + "px";
-    else
-        button.style.left = (widthWindow - setWidth) / 2 + 100 + "px";
+    
 }
 function Next() {
     index = (index + 1) % dictNames[typeAlbum].length;
@@ -198,7 +223,7 @@ function Previos() {
 }
 
 function Close() {
-    preloadOn = false;
+    //preloadOn = false;
     window.location.href = "#";
     typeAlbum = "";
     var back = document.getElementById("albumGrayBack");
@@ -216,11 +241,14 @@ function Close() {
     content.style.opacity = "0";
     var button = document.getElementById("buttonBack");
     button.style.left = "-100%";
+    document.getElementById("leftAlbum").style.top = "-100%";
+    document.getElementById("rightAlbum").style.top = "-100%";
 }
 
 function KeyUp(event) {
     event = event || window.event;
-    switch (event.keyCode) {
+    var keyCode = event.keyCode;
+    switch (keyCode) {
         case 27:
             if (typeAlbum != "") Close();
             break;
@@ -242,8 +270,9 @@ function KeyUp(event) {
 
 var backOn = "<h2>SetAsBackground</h2>";
 var backOff = "<h2>UnSetAsBackground</h2>";
+var backOffUp = "<H2>UnSetAsBackground</H2>";
 function SetAsBackGround(sender) {
-    if (sender.innerHTML == backOff) {
+    if (sender.innerHTML == backOff || sender.innerHTML == backOffUp) {
         DeleteCookie("backGround");
         sender.innerHTML = backOn;
     } else {

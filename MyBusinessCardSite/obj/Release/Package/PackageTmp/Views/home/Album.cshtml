@@ -38,7 +38,7 @@
        onresize="Resize();
     ResizeAlbum();"
       onload="Init(); InitAlbum({ 'Films': @AlbumModel.GetListOfFilseBigJS("Films"), 'Best': @AlbumModel.GetListOfFilseBigJS("Best") },
-       @((new[] {"internetexplorer", "internet explorer", "ie"}.Contains(Request.Browser.Browser.ToLower()) && int.Parse(Request.Browser.Version.Split('.').First()) < 10) ? "true" : "false")
+       @((new[] {"internetexplorer", "internet explorer", "ie"}.Contains(Request.Browser.Browser.ToLower()) && int.Parse(Request.Browser.Version.Split('.').First()) < 9) ? "true" : "false")
        
       );">
 
