@@ -38,7 +38,7 @@ function IsEnd() {
     for (var i = 0; i < 15; i++)
         if (gridValues[i] !== i + 1)
             return false;
-    message('Good game');
+    alert('Good game');
     return true;
 }
 
@@ -55,12 +55,18 @@ function initGame() {
         document.getElementById('game_group').innerHTML += '<div class="row" id="game_row_' + i + '"></div>';
         for (var j = 0; j < 4; j++) {
             document.getElementById('game_row_' + i).innerHTML +=
-                '<div class="col-1-4 gameObj">' +
-                '<div class="paper gameObjText" onclick="move(' + (i * 4 + j) + ')"><div id="td' + (i * 4 + j) + '" style="font: 60px RobotoBold; text-align: center;"></div></div>' +
+                '<div class="col-1-4">' +
+                '<div class="paper gameObjText" onclick="move(' +
+                (i * 4 + j) + ')">' +
+                '<div id="td' + (i * 4 + j) +
+                '" style="font: 60px RobotoBold; text-align: center;"></div>' +
+                '</div>' +
                 '</div>';
+
         }
 
     }
+    //ResizeGame();
     update();
 }
 function message(s) {
@@ -69,4 +75,17 @@ function message(s) {
 
 function message() {
     message("Its a easy game");
+}
+
+function ResizeGame() {
+    //var group = document.getElementById('game_group').getElementsByTagName('div');
+    //alert(group[0]);
+    //for (var i = 0; i < 4; i++)
+    //    for (var j = 0; j < 4; j++) {
+    //        var go = group[i].getElementsByTagName('div')[j];
+    //        var size = group[i].style.width / 4;
+    //        alert(size);
+    //        go.style.width = size;
+    //        go.style.height = size;
+    //    }
 }

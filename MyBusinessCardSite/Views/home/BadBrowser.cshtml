@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Bad Browser</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/StyleBadBrowser.css" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/Content/Images/icon.ico">
+</head>
+<body>
+<div>
+    <div class="top">
+        <h2>Please select major browser</h2>
+    </div>
+    <div class="left up"><a href="https://www.google.ru/chrome/browser/desktop/"><img class="icon" alt="" src="~/Content/Browsers/gc.png" /></a></div>
+    <div class="right up"><a href="http://www.apple.com/ru/safari/"><img class="icon" alt="" src="~/Content/Browsers/s.png" /></a></div>
+    <div class="left down"><a href="http://www.opera.com/ru"><img class="icon" alt="" src="~/Content/Browsers/o.png" /></a></div>
+    <div class="right down"><a href="https://www.mozilla.org/ru/firefox/new/"><img class="icon" alt="" src="~/Content/Browsers/mf.png" /></a></div>
+
+    <div class="bottom">
+        <h2>You browser @Html.Raw(Request.Browser.Browser + " " + Request.Browser.Version)</h2>
+    </div>
+
+</div>
+</body>
+</html>

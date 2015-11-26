@@ -6,27 +6,43 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <script type="text/javascript" src="~/Scripts/Initializer.js"></script>
+    <script type="text/javascript" src="~/Scripts/Cooker.js"></script>
     <link rel="stylesheet" type="text/css" href="~/Content/StyleFonts.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/StyleBase.css" />
-    @if (Request.Browser.IsMobileDevice)
+    <script type="text/javascript" src="~/Scripts/Behavior.js"></script>
+    @if (new[] { "internetexplorer", "internet explorer", "ie" }.Contains(Request.Browser.Browser.ToLower()) && int.Parse(Request.Browser.Version.Split('.').First()) < 10)
     {
-        <link rel="stylesheet" type="text/css" href="~/Content/StyleMobile.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/StyleBaseIE.css" />
     }
     else
     {
-        <link rel="stylesheet" type="text/css" href="~/Content/StyleSite.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/StyleBase.css" />
     }
-    <link rel="shortcut icon" href="~/Content/Images/icon.png">
-    <title>AnoviAlbum</title>
+    @if (Request.Browser.IsMobileDevice)
+    {
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+    }
+    else
+    {
+        <meta name="viewport" content="width=device-width" />
+    }
+    <link rel="shortcut icon" href="~/Content/Images/icon.ico">
+    <title>AnoviSoft - Error 404</title>
 </head>
-<body id="baseBody" onload="init()">
+<body id="baseBody" onload="Init();" onresize="Resize();">
+
+    <div class="bbody" id="firstBack">
+    </div>
+    <div class="cbody" id="secondBack">
+    </div>
+<!--COLUMN-->
+<div id="center_column">
 
     <div class="center_column" id="baseColumn">
         <div class="paper_group">
             <div class="paper">
-                <div class="paper_up"><h1>1404</h1></div>
+                <div class="paper_up">
+                    <h1>404</h1>
+                </div>
                 <h3>Previous page</h3>,
                 <h3>All my troubles seemed so far away</h3>
                 <h3>Now it looks as though they're here to stay</h3>
@@ -34,6 +50,50 @@
             </div>
         </div>
     </div>
-
+    <!--CONTACTINFO-->
+    <div class="paper_group">
+            <div class="paper">
+                <div class="paper_up">
+                    <h2>Social</h2>
+                </div>
+                <div class="row">
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="vk.com/craftydeveloper" src="/Content/Images/icon_vkontakte.png" onclick="location.href = 'https://vk.com/craftydeveloper'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="urfu.ru" src="/Content/Images/icon_urfu.png" onclick="location.href = 'http://urfu.ru/en/'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="www.facebook.com/profile.php?id=100001930047747" src="/Content/Images/icon_face.png" onclick="location.href = 'https://www.facebook.com/profile.php?id=100001930047747'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="plus.google.com/u/0/112157981808654194368" src="/Content/Images/icon_google.png" onclick="location.href = 'https://plus.google.com/u/0/112157981808654194368'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="twitter.com/l0dom" src="/Content/Images/icon_tweet.png" onclick="location.href = 'https://twitter.com/l0dom'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="www.youtube.com/channel/UCM_UOFYX1K7huJsPkt4TXXQ" src="/Content/Images/icon_youtube.png" onclick="location.href = 'http://www.youtube.com/channel/UCM_UOFYX1K7huJsPkt4TXXQ'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="L0dom@hotmail.com" src="/Content/Images/message.png" onclick="location.href = 'mailto:L0dom@hotmail.com'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="Anovi-Soft@hotmail.com" src="/Content/Images/message.png" onclick="location.href = 'mailto:Anovi-Soft@hotmail.com'" />
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>    
+    <!--TOPBAR-->
+    <div class="top_bar" id="topBar">
+        <img class="labelImage border" alt="" id="menuButton" src="/Content/Images/menu.png" />
+    </div><!--MENU-->
+    <div class="leftMenu" id="leftMenu">
+        <div><button class="leftMenuItem" onclick="location.href = '/home/Index'">AnoviSoft</button></div>
+        <div><button class="leftMenuItem" onclick="location.href = '/home/Album'">Album</button></div>
+        <div><button class="leftMenuItem" onclick="location.href = '/home/Game'">Game</button></div>
+        <div><button class="leftMenuItem" onclick="location.href = '/home/Contact'">Contact</button></div>
+    </div>
 </body>
 </html>

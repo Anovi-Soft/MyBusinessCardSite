@@ -1,5 +1,4 @@
 ﻿@model MyBusinessCardSite.Models.ContactModel
-
 @{
     Layout = null;
 }
@@ -8,90 +7,167 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <script type="text/javascript" src="~/Scripts/Initializer.js"></script>
+    <script type="text/javascript" src="~/Scripts/Cooker.js"></script>
     <link rel="stylesheet" type="text/css" href="~/Content/StyleFonts.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/StyleBase.css" />
-    @if (Request.Browser.IsMobileDevice)
+    <script type="text/javascript" src="~/Scripts/Behavior.js"></script>
+    @if (new[] { "internetexplorer", "internet explorer", "ie" }.Contains(Request.Browser.Browser.ToLower()) && int.Parse(Request.Browser.Version.Split('.').First()) < 10)
     {
-        <link rel="stylesheet" type="text/css" href="~/Content/StyleMobile.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/StyleBaseIE.css" />
     }
     else
     {
-        <link rel="stylesheet" type="text/css" href="~/Content/StyleSite.css" />
+        <link rel="stylesheet" type="text/css" href="~/Content/StyleBase.css" />
     }
-    <link rel="shortcut icon" href="~/Content/Images/icon.png">
-    <title>Anovi Contact</title>
+    @if (Request.Browser.IsMobileDevice)
+    {
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+    }
+    else
+    {
+        <meta name="viewport" content="width=device-width" />
+    }
+    <link rel="shortcut icon" href="~/Content/Images/icon.ico">
+    <title>AnoviSoft - Contact With Me</title>
 </head>
-<body id="baseBody" onload="init()">
+<body id="baseBody" onload="Init();" onresize="Resize();">
 
-<div class="center_column" id="baseColumn">
+    <div class="bbody" id="firstBack">
+    </div>
+    <div class="cbody" id="secondBack">
+    </div>
+<!--COLUMN-->
+<div id="center_column">
 
     <div class="paper_group">
         @using (Html.BeginForm())
-            {
+        {
             <div class="paper">
                 <div class="paper_up">
                     <div class="row">
-                        <div class="col-6-8">
+                        <div class="col-5-6">
                             <h1>Write me on email</h1>
                         </div>
-                        <div class="col-1-8"></div>
                         <div class="col-1-8">
                             <button type="submit" class="bar_button">Send</button>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-1" style="padding: 0 0 20px 0">
-                        @Html.ValidationSummary()
-                    </div>
-                    @if (Request.Browser.IsMobileDevice)
-                    {
-                        <div class="col-1">
+                @Html.ValidationSummary()
+                @if (new[] { "internetexplorer", "internet explorer", "ie" }.Contains(Request.Browser.Browser.ToLower()) && int.Parse(Request.Browser.Version.Split('.').First()) < 10)
+                {
+                    <p class="row">
+                        <div class="col-1-4">
                             <h4>*Your name:</h4>
-                            @Html.TextBoxFor(x => x.Name, new { @class = "text_box" })
-                            <h4>*Your email:</h4>
-                            @Html.TextBoxFor(x => x.Email, new { @class = "text_box" })
-                            <h4>Your phone:</h4>
-                            @Html.TextBoxFor(x => x.Phone, new { @class = "text_box" })
-                            <h4>Subject: </h4>
-                            @Html.TextBoxFor(x => x.Title, new { @class = "text_box" })
-                            <h4>*Message: </h4>
-                            @Html.TextAreaFor(x => x.Text, new { @class = "text_box" })
                         </div>
-
-                    }
-                    else
-                    {
-                        <div class="col-1-6">
+                        <div class="col-3-4">@Html.TextBoxFor(x => x.Name, new { @class = "text_box" })</div><br>
+                    </p>
+                    <p class="row">
+                        <div class="col-1-4">
+                            <h4>*Your email:</h4>
+                        </div>
+                        <div class="col-3-4">@Html.TextBoxFor(x => x.Email, new { @class = "text_box" })</div><br>
+                    </p>
+                    <p class="row">
+                        <div class="col-1-4">
+                            <h4> Your phone:</h4>
+                        </div>
+                        <div class="col-3-4">@Html.TextBoxFor(x => x.Phone, new { @class = "text_box" })</div><br>
+                    </p>
+                    <p class="row">
+                        <div class="col-1-4">
+                            <h4> Subject: </h4>
+                        </div>
+                        <div class="col-3-4">@Html.TextBoxFor(x => x.Title, new { @class = "text_box" })</div><br>
+                    </p>
+                    <p class="row">
+                        <div class="col-1-4">
+                            <h4>*Message: </h4>
+                        </div>
+                        <div class="col-3-4">@Html.TextAreaFor(x => x.Text, new { @class = "text_box" })</div><br>
+                    </p>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-1-4">
                             <h4>*Your name:</h4>
+                        </div>
+                        <div class="col-3-4">@Html.TextBoxFor(x => x.Name, new {@class = "text_box"})</div><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-1-4">
                             <h4>*Your email:</h4>
-                            <h4>Your phone:</h4>
-                            <h4>Subject: </h4>
+                        </div>
+                        <div class="col-3-4">@Html.TextBoxFor(x => x.Email, new {@class = "text_box"})</div><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-1-4">
+                            <h4> Your phone:</h4>
+                        </div>
+                        <div class="col-3-4">@Html.TextBoxFor(x => x.Phone, new {@class = "text_box"})</div><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-1-4">
+                            <h4> Subject: </h4>
+                        </div>
+                        <div class="col-3-4">@Html.TextBoxFor(x => x.Title, new {@class = "text_box"})</div><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-1-4">
                             <h4>*Message: </h4>
                         </div>
-                        <div class="col-5-6">
-                            @Html.TextBoxFor(x => x.Name, new { @class = "text_box" })
-                            @Html.TextBoxFor(x => x.Email, new { @class = "text_box" })
-                            @Html.TextBoxFor(x => x.Phone, new { @class = "text_box" })
-                            @Html.TextBoxFor(x => x.Title, new { @class = "text_box" })
-                            @Html.TextAreaFor(x => x.Text, new { @class = "text_box" })
-                        </div>
-                    }
-                    <div class="col-1">
-                        <h4 style="margin: 10px 0 0 -20px">Fields marked by red asterisk (*) are mandatory.</h4>
+                        <div class="col-3-4">@Html.TextAreaFor(x => x.Text, new {@class = "text_box"})</div><br>
                     </div>
-
-                </div>
-
+                }
+                <h4 style="margin: 10px 0 0 -20px">Fields marked by asterisk (*) are mandatory.</h4>
             </div>
+
+
         }
     </div>
-
-
-</div>
-
+    <!--CONTACTINFO-->
+    <div class="paper_group">
+            <div class="paper">
+                <div class="paper_up">
+                    <h2>Social</h2>
+                </div>
+                <div class="row">
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="vk.com/craftydeveloper" src="/Content/Images/icon_vkontakte.png" onclick="location.href = 'https://vk.com/craftydeveloper'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="urfu.ru" src="/Content/Images/icon_urfu.png" onclick="location.href = 'http://urfu.ru/en/'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="www.facebook.com/profile.php?id=100001930047747" src="/Content/Images/icon_face.png" onclick="location.href = 'https://www.facebook.com/profile.php?id=100001930047747'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="plus.google.com/u/0/112157981808654194368" src="/Content/Images/icon_google.png" onclick="location.href = 'https://plus.google.com/u/0/112157981808654194368'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="twitter.com/l0dom" src="/Content/Images/icon_tweet.png" onclick="location.href = 'https://twitter.com/l0dom'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="www.youtube.com/channel/UCM_UOFYX1K7huJsPkt4TXXQ" src="/Content/Images/icon_youtube.png" onclick="location.href = 'http://www.youtube.com/channel/UCM_UOFYX1K7huJsPkt4TXXQ'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="L0dom@hotmail.com" src="/Content/Images/message.png" onclick="location.href = 'mailto:L0dom@hotmail.com'" />
+                    </div>
+                    <div class="col-1-8">
+                        <img class="socImg cborder" alt="Anovi-Soft@hotmail.com" src="/Content/Images/message.png" onclick="location.href = 'mailto:Anovi-Soft@hotmail.com'" />
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>        <!--TOPBAR-->
+    <div class="top_bar" id="topBar">
+        <img class="labelImage border" alt="" id="menuButton" src="/Content/Images/menu.png" />
+    </div> <!--MENU-->
+    <div class="leftMenu" id="leftMenu">
+        <div><button class="leftMenuItem" onclick="location.href = '/home/Index'">AnoviSoft</button></div>
+        <div><button class="leftMenuItem" onclick="location.href = '/home/Album'">Album</button></div>
+        <div><button class="leftMenuItem" onclick="location.href = '/home/Game'">Game</button></div>
+        <div><button class="leftMenuItem" onclick="location.href = '/home/Contact'">Contact</button></div>
+    </div>
 </body>
 </html>
-

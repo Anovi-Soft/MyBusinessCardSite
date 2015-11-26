@@ -89,8 +89,47 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Album\back.png" />
+    <Content Include="Content\Album\Best\1263207756_13.jpg" />
+    <Content Include="Content\Album\Best\18-voskhod_nad_morem-kh-m-70kh100-2014_g..jpg" />
+    <Content Include="Content\Album\Best\9999005.jpg" />
+    <Content Include="Content\Album\Best\antonio_kanaletto_kartina_veneciya_italiya_cerkov_santa_mariyadella_salyute_1680x1050.jpg" />
+    <Content Include="Content\Album\Best\ayvazovskiy-kartinyi2.jpg" />
+    <Content Include="Content\Album\Best\Douglas_Adams_Brazilian_f.jpg" />
+    <Content Include="Content\Album\Best\Drawn_wallpapers_Paintings_Famous_Paintings_023164_.jpg" />
+    <Content Include="Content\Album\Best\landscape-9.jpg" />
+    <Content Include="Content\Album\Best\luxfon.com_4901.jpg" />
+    <Content Include="Content\Album\close.png" />
+    <Content Include="Content\Album\Films\20150314041409!The_Avengers_Age_of_Ultron_poster.jpg" />
+    <Content Include="Content\Album\Films\518042.jpg" />
+    <Content Include="Content\Album\Films\kinopoisk.ru-Furious-Seven-2566744.jpg" />
+    <Content Include="Content\Album\Films\Mad_Max.jpg" />
+    <Content Include="Content\Album\Films\poster52352_1.jpg" />
+    <Content Include="Content\Album\Films\star-wars-episode-7-poster.jpg" />
+    <Content Include="Content\Album\mini\Best\1263207756_13.jpg" />
+    <Content Include="Content\Album\mini\Best\18-voskhod_nad_morem-kh-m-70kh100-2014_g..jpg" />
+    <Content Include="Content\Album\mini\Best\9999005.jpg" />
+    <Content Include="Content\Album\mini\Best\antonio_kanaletto_kartina_veneciya_italiya_cerkov_santa_mariyadella_salyute_1680x1050.jpg" />
+    <Content Include="Content\Album\mini\Best\ayvazovskiy-kartinyi2.jpg" />
+    <Content Include="Content\Album\mini\Best\Douglas_Adams_Brazilian_f.jpg" />
+    <Content Include="Content\Album\mini\Best\Drawn_wallpapers_Paintings_Famous_Paintings_023164_.jpg" />
+    <Content Include="Content\Album\mini\Best\landscape-9.jpg" />
+    <Content Include="Content\Album\mini\Best\luxfon.com_4901.jpg" />
+    <Content Include="Content\Album\mini\Films\20150314041409!The_Avengers_Age_of_Ultron_poster.jpg" />
+    <Content Include="Content\Album\mini\Films\518042.jpg" />
+    <Content Include="Content\Album\mini\Films\kinopoisk.ru-Furious-Seven-2566744.jpg" />
+    <Content Include="Content\Album\mini\Films\Mad_Max.jpg" />
+    <Content Include="Content\Album\mini\Films\poster52352_1.jpg" />
+    <Content Include="Content\Album\mini\Films\star-wars-episode-7-poster.jpg" />
+    <Content Include="Content\Browsers\gc.png" />
+    <Content Include="Content\Browsers\ie.png" />
+    <Content Include="Content\Browsers\mf.png" />
+    <Content Include="Content\Browsers\o.png" />
+    <Content Include="Content\Browsers\s.png" />
     <Content Include="Content\Images\Avatar.jpg" />
     <Content Include="Content\Images\background.png" />
+    <Content Include="Content\Images\cbackground.png" />
+    <Content Include="Content\Images\icon.ico" />
     <Content Include="Content\Images\icon.png" />
     <Content Include="Content\Images\icon_face.png" />
     <Content Include="Content\Images\icon_google.png" />
@@ -100,10 +139,13 @@
     <Content Include="Content\Images\icon_vkontakte.png" />
     <Content Include="Content\Images\icon_youtube.png" />
     <Content Include="Content\Images\label.png" />
+    <Content Include="Content\Images\load.png" />
     <Content Include="Content\Images\menu.png" />
+    <Content Include="Content\Images\message.png" />
+    <Content Include="Content\StyleAlbum.css" />
+    <Content Include="Content\StyleBadBrowser.css" />
     <Content Include="Content\StyleBase.css" />
-    <Content Include="Content\StyleMobile.css" />
-    <Content Include="Content\StyleSite.css" />
+    <Content Include="Content\StyleBaseIE.css" />
     <Content Include="Content\StyleFonts.css" />
     <Content Include="Global.asax" />
     <Content Include="Fonts\RobotoBold\RobotoBold.eot" />
@@ -121,8 +163,10 @@
     <None Include="Properties\PublishProfiles\Anovi-Soft.pubxml" />
     <None Include="Properties\PublishProfiles\AnoviSoft.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Album.js" />
+    <Content Include="Scripts\Behavior.js" />
+    <Content Include="Scripts\Cooker.js" />
     <Content Include="Scripts\GameFift.js" />
-    <Content Include="Scripts\Initializer.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -138,6 +182,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AlbumModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -151,6 +196,7 @@
     <Content Include="Views\home\Thanks.cshtml" />
     <Content Include="Views\home\Game.cshtml" />
     <Content Include="Views\home\Error404.cshtml" />
+    <Content Include="Views\home\BadBrowser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
